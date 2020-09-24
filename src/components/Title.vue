@@ -14,6 +14,7 @@
 <script>
     export default {
         name: "Title",
+        props:["ActiveIndex"],
         data(){
             return{
                 activeIndex: "1",
@@ -27,8 +28,13 @@
                 } else if (index===4){
                     this.handleSelect="4"
                     window.location.href="./about"
+                } else if (index===2){
+                    window.location.href="./user"
                 }
             }
+        },
+        created() {
+            this.activeIndex=this.ActiveIndex
         }
     }
 </script>

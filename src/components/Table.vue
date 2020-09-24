@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-table :data="list" style="width: 100%" ref="table"
-                  @selection-change="handleSelectionChange" @row-click="sel">
+                  @selection-change="handleSelectionChange" @row-click="sel" v-loading="loading">
             <el-table-column type="selection"></el-table-column>
             <el-table-column prop="id" label="学号"></el-table-column>
             <el-table-column prop="name" label="姓名"></el-table-column>
@@ -20,12 +20,12 @@
                 :visible.sync="dialogVisible"
                 width="30%"
                 id="dialog">
-            <span class="el-dialog__body">学号<el-input v-model="current_sel.id" :disabled="if_edit"></el-input></span>
+            <span class="el-dialog__body">学号<el-input v-model="current_sel.id" :disabled="if_edit" maxlength="11" show-word-limit></el-input></span>
             <br>
             <span class="el-dialog__body">姓名<el-input v-model="current_sel.name"></el-input></span>
             <br>
             <span class="el-dialog__body">性别<br>
-                <el-select v-model="current_sel.sex" placeholder="请选择">
+                <el-select v-model="current_sel.sex" placeholder="请选择性别">
                     <el-option
                             v-for="item in sex"
                             :key="item.value"
@@ -99,7 +99,8 @@
                 {
                     value: "女",
                     label: "女"
-                }]
+                }],
+                loading: true
             }
         },
         methods:{
@@ -107,6 +108,7 @@
                 axios.get("http://localhost:8080/student/selStudentAll").then((res) =>{
                     console.log(res.data)
                     this.list=res.data
+                    this.loading=false
                 })
             },
             handleSelectionChange:function (res) {

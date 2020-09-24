@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Title></Title>
+    <Title active-index="1"></Title>
     <Table></Table>
   </div>
 </template>
@@ -16,6 +16,22 @@ export default {
   components: {
     Table,
     Title
+  },
+  data(){
+    return{
+      ifSign:false
+    }
+  },
+  methods:{
+    CheckStatus:function () {
+      this.ifSign=localStorage.getItem("status")
+      if (this.ifSign!=="ok"){
+        window.location.href="./sign_in"
+      }
+    }
+  },
+  created() {
+    this.CheckStatus()
   }
 }
 </script>
