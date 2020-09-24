@@ -1,4 +1,7 @@
-# student_manager
+# StudentManager-Vue-Front
+
+## 后端项目地址
+https://github.com/wangzz-yyzz/StudentManager-Vue-Rear.git
 
 ## Project setup
 ```
@@ -20,5 +23,3 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
