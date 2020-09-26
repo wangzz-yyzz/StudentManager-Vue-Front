@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-table :data="list" style="width: 100%" ref="table"
+        <el-table :data="list" style="width: 100%" ref="table" height="600"
                   @selection-change="handleSelectionChange" @row-click="sel" v-loading="loading">
             <el-table-column type="selection"></el-table-column>
             <el-table-column prop="id" label="学号"></el-table-column>
@@ -58,7 +58,7 @@
   </span>
         </el-dialog>
 
-        <el-button @click="add" plain>新增</el-button>
+        <el-button @click="add" plain icon="el-icon-plus">新增</el-button>
     </div>
 </template>
 
