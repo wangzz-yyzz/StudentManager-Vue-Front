@@ -1,9 +1,18 @@
 <template>
     <div id="container">
         <Title active-index="2"></Title>
-        <el-button plain @click="sign_out">退出登录</el-button>
-        {{user.name}}
-        {{user.password}}
+        <el-card style="width: 300px;margin: 100px auto">
+            <div slot="header">
+                <span>用户信息</span>
+                <el-button style="float: right;padding: 3px 0;margin: auto" type="text" @click="sign_out">退出登录</el-button>
+            </div>
+            <div>
+                用户名：{{user.name}}
+            </div>
+            <div>
+                密码：{{user.password}}
+            </div>
+        </el-card>
     </div>
 </template>
 

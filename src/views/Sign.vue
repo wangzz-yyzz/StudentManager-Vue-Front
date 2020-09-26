@@ -1,15 +1,10 @@
 <template>
     <div>
-        <h2 style="margin-top: 180px">登录</h2>
+        <h1 style="margin-top: 100px">学生管理系统</h1>
+        <h2>登录</h2>
         <div id="container">
-            <div>
-                账号
-            </div>
-            <el-input style="width: 50%;margin: 20px auto 0;" v-model="name"></el-input>
-            <div>
-                密码
-            </div>
-            <el-input style="width: 50%;margin: 20px auto 0;" v-model="password"></el-input>
+            <el-input style="width: 50%;margin: 20px auto 0;" v-model="name" placeholder="请输入账号"></el-input>
+            <el-input style="width: 50%;margin: 20px auto 0;" v-model="password" show-password placeholder="请输入密码"></el-input>
             <el-button style="width: 300px;margin: 0 auto" plain type="success" @click="submit">登录</el-button>
         </div>
 
