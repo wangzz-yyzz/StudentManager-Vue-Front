@@ -3,9 +3,9 @@
         <h1 style="margin-top: 100px">学生管理系统</h1>
         <h2>登录</h2>
         <div id="container">
-            <el-input style="width: 50%;margin: 20px auto 0;" v-model="name" placeholder="请输入账号"></el-input>
-            <el-input style="width: 50%;margin: 20px auto 0;" v-model="password" show-password placeholder="请输入密码"></el-input>
-            <el-button style="width: 300px;margin: 0 auto" plain type="success" @click="submit">登录</el-button>
+            <el-input style="width: 50%;margin: 20px auto 0;" v-model="name" placeholder="请输入账号" prefix-icon="el-icon-user"></el-input>
+            <el-input style="width: 50%;margin: 20px auto 0;" v-model="password" show-password placeholder="请输入密码" prefix-icon="el-icon-coin"></el-input>
+            <el-button style="width: 300px;margin: 0 auto" plain type="success" @click="submit" icon="el-icon-position">登录</el-button>
         </div>
 
     </div>
