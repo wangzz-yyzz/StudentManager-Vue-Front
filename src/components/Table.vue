@@ -59,6 +59,7 @@
         </el-dialog>
 
         <el-button @click="add" plain icon="el-icon-plus">新增</el-button>
+        <el-button @click="delAll" plain icon="el-icon-plus">删除</el-button>
     </div>
 </template>
 
@@ -100,7 +101,8 @@
                     value: "女",
                     label: "女"
                 }],
-                loading: true
+                loading: true,
+                all_sel: null
             }
         },
         methods:{
@@ -112,6 +114,7 @@
                 })
             },
             handleSelectionChange:function (res) {
+                this.all_sel = res
                 console.log(res)
             },
             edit:function () {
@@ -123,7 +126,7 @@
             },
             sel:function (row) {
                 this.current_sel=row
-                console.log(row)
+                // console.log(row)
             },
             del:function () {
                 this.dialogDel=true
@@ -178,6 +181,21 @@
                 this.dialogDel=false
                 this.dialogVisible=false
                 this.status=1
+            },
+            delAll:function () {
+                let len = this.all_sel.length
+                function my_del(my_id) {
+                    axios.get("http://localhost:8080/student/delete",{params:{"id":my_id}}).then(
+                        (res) =>{
+                            console.log(res.data)
+                        }
+                    )
+                }
+                for (let i = 0; i<len; i++){
+                    my_del(this.all_sel[i].id)
+                }
+                this.getData()
+                this.$message("成功删除数据")
             }
         },
         created() {
