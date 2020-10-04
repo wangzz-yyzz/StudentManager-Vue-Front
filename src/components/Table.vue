@@ -58,8 +58,8 @@
   </span>
         </el-dialog>
 
-        <el-button @click="add" plain icon="el-icon-plus">新增</el-button>
-        <el-button @click="delAll" plain icon="el-icon-plus">删除</el-button>
+        <el-button @click="add" plain icon="el-icon-circle-plus">新增</el-button>
+        <el-button @click="delAll" plain icon="el-icon-delete-solid">删除</el-button>
     </div>
 </template>
 
@@ -183,7 +183,13 @@
                 this.status=1
             },
             delAll:function () {
-                let len = this.all_sel.length
+                let len = null
+                try {
+                    len = this.all_sel.length
+                }catch (e) {
+                    this.$message("未选择任何内容")
+                }
+
                 function my_del(my_id) {
                     axios.get("http://localhost:8080/student/delete",{params:{"id":my_id}}).then(
                         (res) =>{
@@ -191,11 +197,16 @@
                         }
                     )
                 }
-                for (let i = 0; i<len; i++){
-                    my_del(this.all_sel[i].id)
+
+                if (len === null){
+                    len = null
+                } else {
+                    for (let i = 0; i<len; i++){
+                        my_del(this.all_sel[i].id)
+                    }
+                    this.$message("成功删除数据")
+                    location.reload()
                 }
-                this.getData()
-                this.$message("成功删除数据")
             }
         },
         created() {
