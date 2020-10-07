@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import User from "../views/User";
 import Sign from "../views/Sign";
+import SignUp from "../views/SignUp";
+import Page_404 from "../views/Page_404";
 
 Vue.use(VueRouter)
 
@@ -29,7 +31,17 @@ const routes = [
     path: '/sign_in',
     name: Sign,
     component: Sign
-  }
+  },
+  {
+    path: '/sign_up',
+    name: SignUp,
+    component: SignUp
+  },
+    {
+        path: "*",
+        name: Page_404,
+        component: Page_404
+    }
 ]
 
 const router = new VueRouter({

@@ -6,6 +6,7 @@
             <el-input style="width: 50%;margin: 20px auto 0;" v-model="name" placeholder="请输入账号" prefix-icon="el-icon-user"></el-input>
             <el-input style="width: 50%;margin: 20px auto 0;" v-model="password" show-password placeholder="请输入密码" prefix-icon="el-icon-coin"></el-input>
             <el-button style="width: 300px;margin: 0 auto" plain type="success" @click="submit" icon="el-icon-position">登录</el-button>
+            <el-button style="width: 300px;margin: 0 auto" plain type="success" @click="sign_up" icon="el-icon-position">注册新账号</el-button>
         </div>
 
     </div>
@@ -37,9 +38,14 @@
                     } else if (res.data==="wrong name"){
                         this.$message("用户名错误")
                     } else if (res.data==="wrong password"){
+                        console.log(this.password)
                         this.$message("密码错误")
                     }
                 })
+            },
+
+            sign_up:function () {
+                window.location.href='./sign_up'
             }
         }
     }

@@ -1,14 +1,15 @@
 <template>
     <div>
         <el-table :data="list" style="width: 100%" ref="table" height="600"
-                  @selection-change="handleSelectionChange" @row-click="sel" v-loading="loading">
+                  @selection-change="handleSelectionChange" @row-click="sel" v-loading="loading"
+        @row-dblclick="checkDetail">
             <el-table-column type="selection"></el-table-column>
-            <el-table-column prop="id" label="学号"></el-table-column>
+            <el-table-column prop="id" label="学号" sortable></el-table-column>
             <el-table-column prop="name" label="姓名"></el-table-column>
-            <el-table-column prop="sex" label="性别"></el-table-column>
-            <el-table-column prop="college" label="学院"></el-table-column>
-            <el-table-column prop="major" label="专业"></el-table-column>
-            <el-table-column prop="grade" label="年级"></el-table-column>
+            <el-table-column prop="sex" label="性别" sortable></el-table-column>
+            <el-table-column prop="college" label="学院" sortable></el-table-column>
+            <el-table-column prop="major" label="专业" sortable></el-table-column>
+            <el-table-column prop="grade" label="年级" sortable></el-table-column>
             <el-table-column label="操作">
                 <i class="el-icon-edit" @click="edit"></i>
                 <i class="el-icon-delete" @click="del"></i>
@@ -21,9 +22,9 @@
                 width="30%"
                 id="dialog">
             <span class="el-dialog__body">学号<el-input v-model="current_sel.id" :disabled="if_edit" maxlength="11" show-word-limit></el-input></span>
-            <br>
+            <br><br>
             <span class="el-dialog__body">姓名<el-input v-model="current_sel.name"></el-input></span>
-            <br>
+            <br><br>
             <span class="el-dialog__body">性别<br>
                 <el-select v-model="current_sel.sex" placeholder="请选择性别">
                     <el-option
@@ -34,16 +35,16 @@
                     </el-option>
                 </el-select>
             </span>
-            <br>
+            <br><br>
             <span class="el-dialog__body">学院<el-input v-model="current_sel.college"></el-input></span>
-            <br>
+            <br><br>
             <span class="el-dialog__body">专业<el-input v-model="current_sel.major"></el-input></span>
-            <br>
+            <br><br>
             <span class="el-dialog__body">年级<el-input v-model="current_sel.grade"></el-input></span>
 
             <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="submit">确 定</el-button>
+                <el-button type="primary" @click="submit" v-if="!ifChecking">确 定</el-button>
             </span>
         </el-dialog>
 
@@ -102,15 +103,20 @@
                     label: "女"
                 }],
                 loading: true,
-                all_sel: null
+                all_sel: null,
+                ifChecking: false
             }
         },
         methods:{
             getData:function () {
                 axios.get("http://localhost:8080/student/selStudentAll").then((res) =>{
                     console.log(res.data)
-                    this.list=res.data
-                    this.loading=false
+                    this.list = res.data
+                    this.loading = false
+                },() =>{
+                    console.log("wrong")
+                }).catch(error =>{
+                    console.log(error)
                 })
             },
             handleSelectionChange:function (res) {
@@ -120,13 +126,13 @@
             edit:function () {
                 this.dialogVisible=true
                 this.dialogTitle="修改信息"
+                this.ifChecking = false
                 this.status=2
                 this.if_edit=true
                 console.log("edit"+this.current_sel.id)
             },
             sel:function (row) {
                 this.current_sel=row
-                // console.log(row)
             },
             del:function () {
                 this.dialogDel=true
@@ -135,6 +141,7 @@
             },
             add:function () {
                 this.dialogTitle="新增信息"
+                this.ifChecking = false
                 this.dialogVisible=true
                 this.current_sel=this.def_current_sel
                 this.status=4
@@ -207,6 +214,12 @@
                     this.$message("成功删除数据")
                     location.reload()
                 }
+            },
+            checkDetail:function (row) {
+                this.current_sel = row
+                this.ifChecking = true
+                console.log("check")
+                this.dialogVisible = true
             }
         },
         created() {
@@ -224,4 +237,7 @@
         color: orangered;
     }
 
+    el_input{
+        width: 50%;
+    }
 </style>
