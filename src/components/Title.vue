@@ -30,6 +30,8 @@
                     window.location.href="./about"
                 } else if (index===2){
                     window.location.href="./user"
+                } else if (index===3){
+                    window.location.href="./message"
                 }
             }
         },
@@ -40,5 +42,5 @@
 </script>
 
 <style scoped lang="scss">
-    
+
 </style>

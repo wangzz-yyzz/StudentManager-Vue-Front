@@ -5,6 +5,7 @@ import User from "../views/User";
 import Sign from "../views/Sign";
 import SignUp from "../views/SignUp";
 import Page_404 from "../views/Page_404";
+import MyMessage from "../views/MyMessage";
 
 Vue.use(VueRouter)
 
@@ -41,7 +42,12 @@ const routes = [
         path: "*",
         name: Page_404,
         component: Page_404
-    }
+    },
+  {
+    path: "/message",
+    name: MyMessage,
+    component: MyMessage
+  }
 ]
 
 const router = new VueRouter({
