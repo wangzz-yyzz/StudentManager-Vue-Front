@@ -42,7 +42,15 @@
         methods:{
             next:function () {
                 if (this.step===0){
-                    this.step++
+                    axios.get("http://localhost:8080/manager/check_if_has_same_name",{params:{"name":this.user_name}})
+                    .then((res)=>{
+                        console.log(res.data)
+                        if (res.data === "ok"){
+                            this.step++
+                        } else {
+                            this.$message("该用户名已存在！")
+                        }
+                    })
                 }else if (this.step===1){
                     console.log(this.user_name)
                     console.log(this.password)
